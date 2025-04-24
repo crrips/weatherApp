@@ -100,7 +100,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               controller: _controller,
               onChanged: _onTextChanged,
               decoration: InputDecoration(
-                hintText: 'Search...',
+                hintText: 'Search location...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.my_location),
@@ -120,8 +120,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
               onSubmitted: (String value) async {
                 if (_locations.isNotEmpty && _coordinates.isNotEmpty) {
                   _controller.text = '';
-                  _locations = [];
                   _selectedLocation = _locations.first;
+                  _locations = [];
 
                   appState.enableSearch(
                     _coordinates.first.split(', ')[0],
@@ -178,8 +178,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       title: Text(item),
                       onTap: () async {
                         _controller.text = '';
-                        _locations = [];
                         _selectedLocation = item;
+                        _locations = [];
 
                         appState.enableSearch(
                           _coordinates[index].split(', ')[0],
