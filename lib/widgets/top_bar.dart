@@ -107,7 +107,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   onPressed: widget.onLocationPressed,
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade200,
+                // ignore: deprecated_member_use
+                fillColor: Colors.white.withOpacity(0.8),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 0,
@@ -152,7 +153,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 margin: const EdgeInsets.only(top: 8),
                 constraints: const BoxConstraints(maxHeight: 250),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  // ignore: deprecated_member_use
+                  color: Colors.white.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: const [
                     BoxShadow(
@@ -172,10 +174,30 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         title: Text('Error fetching locations'),
                       );
                     }
+                    if (_locations[index].contains(', ,')) {
+                      _locations[index] = _locations[index].replaceAll(
+                        ', ,',
+                        ',',
+                      );
+                    }
                     final item = _locations[index];
                     isHidden = false;
                     return ListTile(
-                      title: Text(item),
+                      title: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: item.split(',')[0],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ',${item.substring(item.indexOf(',') + 1)}',
+                            ),
+                          ],
+                        ),
+                      ),
                       onTap: () async {
                         _controller.text = '';
                         _selectedLocation = item;
@@ -202,15 +224,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
               const SizedBox(height: 16),
               Text(
                 _selectedLocation ?? '',
-                style: const TextStyle(fontSize: 24),
+                style: const TextStyle(fontSize: 24, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ] else if (appState.isGeoPressed == true) ...[
               const SizedBox(height: 16),
               if (appState.apiFail == null)
-                Text('Current location', style: const TextStyle(fontSize: 24)),
+                Text(
+                  'Current location',
+                  style: const TextStyle(fontSize: 24, color: Colors.white),
+                ),
               if (appState.apiFail != null)
-                Text(appState.apiFail ?? '', style: TextStyle(fontSize: 24)),
+                Text(
+                  appState.apiFail ?? '',
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
             ],
           ],
         ),

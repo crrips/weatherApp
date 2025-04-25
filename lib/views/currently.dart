@@ -16,15 +16,40 @@ class Currently extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (appState.lat != null && appState.lon != null)
+            if (appState.lat != null && appState.lon != null) ...[
               Text(
-                appState.curWeatherText ?? 'No data available',
-                style: const TextStyle(fontSize: 24),
-              )
-            else
+                appState.cur?.getTemperature() ?? '',
+                style: const TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.indigo,
+                ),
+              ),
+              const SizedBox(height: 32),
+              Text(
+                appState.cur?.getWeatherDescription() ?? '',
+                style: const TextStyle(fontSize: 24, color: Colors.white70),
+              ),
+              Icon(
+                appState.cur?.getWeatherIcon(),
+                size: 64,
+                color: appState.cur?.getWeatherIconColor(),
+              ),
+              const SizedBox(height: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.air_sharp, size: 24, color: Colors.blue),
+                  Text(
+                    appState.cur?.getWindspeed() ?? '',
+                    style: const TextStyle(fontSize: 24, color: Colors.white70),
+                  ),
+                ],
+              ),
+            ] else
               const Text(
                 'No location selected',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24, color: Colors.white),
               ),
           ],
         ),

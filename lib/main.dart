@@ -77,26 +77,34 @@ class _HomePageState extends State<HomePage>
     final appState = Provider.of<AppState>(context);
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomAppBar(
-              onSearchTap: () {
-                appState.toggleGeoPressed();
-              },
-              onLocationPressed: () => handleLocationPressed(context),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [Currently(), Today(), Weekly()],
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/bg.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomAppBar(
+                onSearchTap: () {
+                  appState.toggleGeoPressed();
+                },
+                onLocationPressed: () => handleLocationPressed(context),
               ),
-            ),
-          ],
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [Currently(), Today(), Weekly()],
+                ),
+              ),
+              BottomBar(tabController: _tabController),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: BottomBar(tabController: _tabController),
     );
   }
 }

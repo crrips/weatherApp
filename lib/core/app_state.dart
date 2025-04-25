@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../services/fetch_data.dart';
+import '../models/cur_weather.dart';
+import '../models/today_weather.dart';
+import '../models/weekly_weather.dart';
 
 class AppState extends ChangeNotifier {
+
+  CurrentWeather? cur;
+  TodayWeather? today;
+  WeeklyWeather? weekly;
+
   bool isGeoPressed = false;
   bool isGeolocationEnabled = false;
 
@@ -22,9 +30,9 @@ class AppState extends ChangeNotifier {
     fetchData.setLongitude(lon!);
 
     try {
-      final cur = await fetchData.fetchCurrentWeather();
-      final today = await fetchData.fetchTodayWeather();
-      final weekly = await fetchData.fetchWeeklyWeather();
+      cur = await fetchData.fetchCurrentWeather();
+      today = await fetchData.fetchTodayWeather();
+      weekly = await fetchData.fetchWeeklyWeather();
 
       setCurWeatherText(cur.toString());
       setTodayWeatherText(today.toString());
