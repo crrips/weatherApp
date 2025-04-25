@@ -17,12 +17,15 @@ class Weekly extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (appState.lat != null && appState.lon != null)
+              if (appState.lat != null &&
+                  appState.lon != null &&
+                  appState.weekly != null) ...[
+
                 Text(
                   appState.weeklyWeatherText ?? 'No data available',
                   style: const TextStyle(fontSize: 18),
-                )
-              else
+                ),
+              ] else
                 const Text(
                   'No location selected',
                   style: TextStyle(fontSize: 24),

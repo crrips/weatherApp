@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
@@ -24,7 +26,6 @@ class _BottomBarState extends State<BottomBar> {
               child: Container(
                 height: 72,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                // ignore: deprecated_member_use
                 color: Colors.grey.withOpacity(0.4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

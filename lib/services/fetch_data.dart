@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 // import 'package:flutter/material.dart';
 
-import '../models/location.dart';
-import '../models/cur_weather.dart';
-import '../models/today_weather.dart';
-import '../models/weekly_weather.dart';
+import '../models/location_model.dart';
+import '../models/cur_model.dart';
+import '../models/today_model.dart';
+import '../models/weekly_model.dart';
 
 class FetchData {
   String? apiLocations = 'https://geocoding-api.open-meteo.com/v1/';
@@ -20,7 +20,7 @@ class FetchData {
 
   String? currentWeather = '&current_weather=true';
   String? todayWeather =
-      '&forecast_days=1&hourly=temperature_2m,wind_speed_10m';
+      '&forecast_days=1&hourly=temperature_2m,wind_speed_10m,weather_code';
   String? weeklyWeather =
       '&daily=temperature_2m_max,temperature_2m_min,weather_code';
 
@@ -98,6 +98,7 @@ class FetchData {
       final temperatures =
           jsonData['hourly']['temperature_2m'] as List<dynamic>;
       final windSpeeds = jsonData['hourly']['wind_speed_10m'] as List<dynamic>;
+      final weatherCodes = jsonData['hourly']['weather_code'] as List<dynamic>;
 
       final todayWeather = TodayWeather(
         times: times.map((time) => time.toString()).toList(),
@@ -105,6 +106,7 @@ class FetchData {
             temperatures.map((temp) => (temp as num).toDouble()).toList(),
         windSpeeds:
             windSpeeds.map((speed) => (speed as num).toDouble()).toList(),
+        weatherCodes: weatherCodes.map((code) => code as int).toList(),
       );
 
       return todayWeather;

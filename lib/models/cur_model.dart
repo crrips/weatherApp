@@ -91,7 +91,7 @@ class CurrentWeather {
 
   Color getWeatherIconColor() {
     if (weatherCode == 0) {
-      return Colors.yellow;
+      return Colors.orangeAccent;
     }
     if ([1, 2].contains(weatherCode)) {
       return Colors.orangeAccent;
@@ -111,9 +111,9 @@ class CurrentWeather {
     if ([71, 73, 75, 77, 85, 86].contains(weatherCode)) {
       return Colors.white;
     }
-    if ([95, 96, 99].contains(weatherCode)) return Colors.deepPurple;
-    {
-      return Colors.black;
+    if ([95, 96, 99].contains(weatherCode)) {
+      return Colors.deepPurple;
     }
+    return Colors.grey;
   }
 }

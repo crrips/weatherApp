@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../services/fetch_data.dart';
-import '../models/cur_weather.dart';
-import '../models/today_weather.dart';
-import '../models/weekly_weather.dart';
+import '../models/cur_model.dart';
+import '../models/today_model.dart';
+import '../models/weekly_model.dart';
 
 class AppState extends ChangeNotifier {
-
   CurrentWeather? cur;
   TodayWeather? today;
   WeeklyWeather? weekly;
@@ -57,6 +56,7 @@ class AppState extends ChangeNotifier {
     isGeolocationEnabled = true;
     lat = latitude;
     lon = longitude;
+    apiFail = null;
     notifyListeners();
   }
 

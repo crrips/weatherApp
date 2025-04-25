@@ -22,7 +22,7 @@ class Currently extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
-                  color: Colors.indigo,
+                  color: Colors.amber,
                 ),
               ),
               const SizedBox(height: 32),
@@ -30,6 +30,7 @@ class Currently extends StatelessWidget {
                 appState.cur?.getWeatherDescription() ?? '',
                 style: const TextStyle(fontSize: 24, color: Colors.white70),
               ),
+              const SizedBox(height: 4),
               Icon(
                 appState.cur?.getWeatherIcon(),
                 size: 64,
@@ -40,6 +41,7 @@ class Currently extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.air_sharp, size: 24, color: Colors.blue),
+                  const SizedBox(width: 4),
                   Text(
                     appState.cur?.getWindspeed() ?? '',
                     style: const TextStyle(fontSize: 24, color: Colors.white70),
