@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../core/app_state.dart';
 
+import '../widgets/weekly_chart.dart';
+import '../widgets/weekly_scroll.dart';
+
 class Weekly extends StatelessWidget {
   const Weekly({super.key});
 
@@ -20,15 +23,26 @@ class Weekly extends StatelessWidget {
               if (appState.lat != null &&
                   appState.lon != null &&
                   appState.weekly != null) ...[
-
-                Text(
-                  appState.weeklyWeatherText ?? 'No data available',
-                  style: const TextStyle(fontSize: 18),
+                WeeklyChart(
+                  temperaturesMin: appState.weekly!.getTemperaturesMin,
+                  temperaturesMax: appState.weekly!.getTemperaturesMax,
+                  times: appState.weekly!.getTimes,
                 ),
+                const SizedBox(height: 16),
+                WeeklyScroll(
+                  temperaturesMin: appState.weekly!.getTemperaturesMin,
+                  temperaturesMax: appState.weekly!.getTemperaturesMax,
+                  times: appState.weekly!.getTimes,
+                  weather: appState.weekly!.getWeatherCodes,
+                ),
+                // Text(
+                //   appState.weeklyWeatherText ?? 'No data available',
+                //   style: const TextStyle(fontSize: 18),
+                // ),
               ] else
                 const Text(
                   'No location selected',
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
             ],
           ),

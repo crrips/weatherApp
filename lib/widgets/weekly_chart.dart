@@ -3,13 +3,15 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class TodayChart extends StatelessWidget {
-  final List<double> hourlyTemperatures;
-  final List<String> hours;
+class WeeklyChart extends StatelessWidget {
+  final List<double> temperaturesMin;
+  final List<double> temperaturesMax;
+  final List<String> times;
 
-  const TodayChart({
-    required this.hourlyTemperatures,
-    required this.hours,
+  const WeeklyChart({
+    required this.temperaturesMin,
+    required this.temperaturesMax,
+    required this.times,
     super.key,
   });
 
@@ -21,20 +23,19 @@ class TodayChart extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: LineChart(
           LineChartData(
-            minY: hourlyTemperatures.reduce((a, b) => a < b ? a : b) - 1,
-            maxY: hourlyTemperatures.reduce((a, b) => a > b ? a : b) + 4,
+            minY: temperaturesMin.reduce((a, b) => a < b ? a : b) - 1,
+            maxY: temperaturesMax.reduce((a, b) => a > b ? a : b) + 6,
             titlesData: FlTitlesData(
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
                   reservedSize: 32,
-                  interval: 3,
-                  maxIncluded: false,
+                  maxIncluded: true,
                   getTitlesWidget: (value, meta) {
                     final index = value.toInt();
-                    if (index >= 0 && index < hours.length) {
+                    if (index >= 0 && index < times.length) {
                       return Text(
-                        '${hours[index]}:00',
+                        times[index],
                         style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 10,
@@ -50,7 +51,7 @@ class TodayChart extends StatelessWidget {
                   showTitles: true,
                   minIncluded: false,
                   maxIncluded: false,
-                  interval: 2,
+                  interval: 4,
                   getTitlesWidget: (value, meta) {
                     return Text(
                       '${value.toInt()}°',
@@ -81,19 +82,19 @@ class TodayChart extends StatelessWidget {
             borderData: FlBorderData(show: false),
             lineBarsData: [
               LineChartBarData(
-                spots: List.generate(hourlyTemperatures.length, (index) {
-                  return FlSpot(index.toDouble(), hourlyTemperatures[index]);
+                spots: List.generate(temperaturesMax.length, (index) {
+                  return FlSpot(index.toDouble(), temperaturesMax[index]);
                 }),
                 isCurved: true,
-                color: Colors.orange,
+                color: Colors.red,
                 barWidth: 4,
                 isStrokeCapRound: true,
                 belowBarData: BarAreaData(
                   show: true,
                   gradient: LinearGradient(
                     colors: [
-                      Colors.orange.withOpacity(0.4),
-                      Colors.orange.withOpacity(0.05),
+                      Colors.red.withOpacity(0.4),
+                      Colors.red.withOpacity(0.05),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -101,7 +102,31 @@ class TodayChart extends StatelessWidget {
                 ),
                 dotData: FlDotData(show: false),
                 gradient: const LinearGradient(
-                  colors: [Color(0xFFFF8C42), Color(0xFFFFA857)],
+                  colors: [Color(0xFFFF5252), Color(0xFFFF4081)],
+                ),
+              ),
+              LineChartBarData(
+                spots: List.generate(temperaturesMin.length, (index) {
+                  return FlSpot(index.toDouble(), temperaturesMin[index]);
+                }),
+                isCurved: true,
+                color: Colors.blue,
+                barWidth: 4,
+                isStrokeCapRound: true,
+                belowBarData: BarAreaData(
+                  show: true,
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.blue.withOpacity(0.4),
+                      Colors.blue.withOpacity(0.05),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                dotData: FlDotData(show: false),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF42A5F5), Color(0xFF64B5F6)],
                 ),
               ),
             ],
