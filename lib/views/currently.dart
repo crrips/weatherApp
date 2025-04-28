@@ -18,7 +18,9 @@ class Currently extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            if (appState.lat != null && appState.lon != null) ...[
+            if (appState.lat != null &&
+                appState.lon != null &&
+                appState.cur != null) ...[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ClipRRect(
