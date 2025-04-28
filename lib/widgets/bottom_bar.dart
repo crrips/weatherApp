@@ -24,9 +24,13 @@ class _BottomBarState extends State<BottomBar> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.1),
+                  border: Border.all(color: Colors.white.withOpacity(0.15)),
+                  borderRadius: BorderRadius.circular(40),
+                ),
                 height: 72,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                color: Colors.grey.withOpacity(0.4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

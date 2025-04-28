@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WeatherProperties {
-    static Map<int, String> weatherCodeDescriptions = {
+  static Map<int, String> weatherCodeDescriptions = {
     0: 'Clear sky',
     1: 'Mainly clear',
     2: 'Partly cloudy',
@@ -32,7 +32,7 @@ class WeatherProperties {
     99: 'Thunderstorm with heavy hail',
   };
 
-    static IconData getWeatherIcon(weatherCode) {
+  static IconData getWeatherIcon(weatherCode) {
     if (weatherCode == 0) return Icons.wb_sunny;
     if ([1, 2].contains(weatherCode)) {
       return Icons.wb_sunny_outlined;

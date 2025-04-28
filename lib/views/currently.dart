@@ -38,7 +38,7 @@ class Currently extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 8),
                               Text(
                                 appState.cur?.getTemperature() ?? '',
                                 style: const TextStyle(
@@ -54,7 +54,7 @@ class Currently extends StatelessWidget {
                                   color: Colors.white70,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              const SizedBox(height: 8),
                               Icon(
                                 WeatherProperties.getWeatherIcon(
                                   appState.cur?.weatherCode ?? 100,
